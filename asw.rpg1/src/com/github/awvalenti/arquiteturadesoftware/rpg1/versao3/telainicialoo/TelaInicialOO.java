@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,7 +15,7 @@ public class TelaInicialOO {
 	private int numeroColunas;
 
 	public TelaInicialOO(Elemento[][] disposicaoInicial) throws IOException {
-
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.numeroLinhas = disposicaoInicial.length;
@@ -34,8 +35,11 @@ public class TelaInicialOO {
 		frame.setVisible(true);
 	}
 
-	public void alterarElemento(int linha, int coluna, Elemento novoElemento) {
-		((JLabel) frame.getContentPane().getComponent(linha * numeroColunas + coluna)).setIcon(novoElemento.getIcone());
+	public void alterarElemento(int linha, int coluna, Elemento novoElemento) throws IOException {
+		((JLabel) frame.getContentPane().getComponent(linha * numeroColunas + coluna)).setIcon(carregarIcone(novoElemento));
 	}
 
+	private Icon carregarIcone(Elemento elemento) throws IOException {
+		return new ImageIcon(ImageIO.read(getClass().getResourceAsStream(elemento.getCaminhoImagem())));
+	}
 }
