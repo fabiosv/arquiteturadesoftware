@@ -23,6 +23,14 @@ public class TelaInicialOO {
 	private int linhaPassagem;
 	private int colunaPassagem;
 	private int macasRestantes;
+	
+	/* FabricaIcones
+	 * Elemento
+	 * Tabuleiro
+	 * TelaJogo
+	 * Posicao
+	 * LogicaJogo
+	 */
 
 	public TelaInicialOO(Elemento[][] disposicaoInicial) {
 		tabuleiro = disposicaoInicial;

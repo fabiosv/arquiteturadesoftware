@@ -6,8 +6,6 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-import com.github.awvalenti.arquiteturadesoftware.rpg1.versao1.procedimental.Main;
-
 public enum Elemento {
 
 	AGUA("/agua.png"),
@@ -23,7 +21,7 @@ public enum Elemento {
 		this.caminhoImagem = caminhoImagem;
 		
 		try {
-			this.icone = new ImageIcon(ImageIO.read(Main.class.getResourceAsStream(caminhoImagem)));
+			this.icone = new ImageIcon(ImageIO.read(MainOO.class.getResourceAsStream(caminhoImagem)));//Main
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
