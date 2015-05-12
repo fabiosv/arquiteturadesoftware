@@ -19,6 +19,7 @@ public class TelaJogo implements SaidaJogo {
 	private Tabuleiro tabuleiro;
 	private FabricaIcones fabricaIcones;
 	private JFrame frame;
+	private FabricaSom efeitosSonoros;
 
 	public TelaJogo(Tabuleiro tabuleiro, FabricaIcones fabricaIcones) {
 		this.tabuleiro = tabuleiro;
@@ -29,6 +30,7 @@ public class TelaJogo implements SaidaJogo {
 		frame.addKeyListener(new TecladoListener());
 
 		preencherTela();
+		this.efeitosSonoros = new FabricaSom();
 
 		frame.pack();
 		frame.setLocationRelativeTo(null);
