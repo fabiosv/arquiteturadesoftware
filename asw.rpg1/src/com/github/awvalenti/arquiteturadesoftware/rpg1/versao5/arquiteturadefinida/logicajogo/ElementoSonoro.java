@@ -1,8 +1,6 @@
 package com.github.awvalenti.arquiteturadesoftware.rpg1.versao5.arquiteturadefinida.logicajogo;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 import javax.sound.sampled.*;
 
@@ -11,6 +9,7 @@ public enum ElementoSonoro {
 	FUNDO("/fundo.wav"), 
 	MORREU("/morreu.wav"), 
 	MACA("/moeda.wav"), 
+	GANHOU("/ganhou.wav"),
 	MUSICA("/Britney Spears-Piece of Me.wav");
 
 	private Clip clip;
@@ -64,11 +63,6 @@ public enum ElementoSonoro {
 		}
 		clip.setFramePosition(position-position);
 		clip.start();
-	}
-
-	// Optional static method to pre-load all the sound files.
-	static void init() {
-		values(); // calls the constructor for all the elements
 	}
 
 }

@@ -22,5 +22,6 @@ public class FabricaSom {
 	
 	public void acabouFase(){
 		ElementoSonoro.FUNDO.resume();
+		ElementoSonoro.GANHOU.play();
 	}
 }
