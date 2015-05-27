@@ -54,8 +54,8 @@ public class Tabuleiro implements SaidaTemporizador{
 		switch (elementoAlcancado) {
 		case AGUA:
 			temporizador.pararContador();
-			saida.perderJogo();
 			fabricaSom.perdeu();
+			saida.perderJogo();
 			break;
 
 		case MACA:
@@ -65,8 +65,8 @@ public class Tabuleiro implements SaidaTemporizador{
 
 		case PORTAL:
 			temporizador.pararContador();
-			saida.passarDeFase();
 			fabricaSom.acabouFase();
+			saida.passarDeFase();	
 			break;
 
 		default:

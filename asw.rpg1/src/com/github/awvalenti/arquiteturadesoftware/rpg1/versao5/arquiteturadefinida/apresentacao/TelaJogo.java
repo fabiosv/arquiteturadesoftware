@@ -24,44 +24,35 @@ public class TelaJogo implements SaidaJogo {
 
 	private Hud hud;
 	private JPanel jogo;
-	private JPanel container;
 
 	public TelaJogo(Tabuleiro tabuleiro, FabricaIcones fabricaIcones) {
 		this.tabuleiro = tabuleiro;
 		this.fabricaIcones = fabricaIcones;
 
 		frame = new JFrame();
-
-		jogo = new JPanel();
-		jogo.setLayout(new GridLayout(tabuleiro.getNumeroLinhas(), tabuleiro.getNumeroColunas()));
-		
-		container = new JPanel();
-		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-		
-		hud = new Hud(tabuleiro.getNumeroColunas());
-
-		// frame.setLayout(new GridLayout(tabuleiro.getNumeroLinhas(),
-		// tabuleiro.getNumeroColunas()));
 		frame.addKeyListener(new TecladoListener());
 
-		container.add(hud.getHud());
-		container.add(jogo);
-
-		frame.add(container);
-		// frame.add(gerarTelaJogo());
-
-		preencherTela();
+		frame.add(gerarTelaJogoComHUD());
 
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	private JPanel gerarTelaJogo() {
-		jogo.setLayout(new GridLayout(tabuleiro.getNumeroLinhas(), tabuleiro
-				.getNumeroColunas()));
+	private JPanel gerarTelaJogoComHUD() {
+		JPanel container = new JPanel();
+		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
 		
-		// preencherTela(jogo);
+		jogo = new JPanel();
+		jogo.setLayout(new GridLayout(tabuleiro.getNumeroLinhas(), tabuleiro.getNumeroColunas()));
+		
+		hud = new Hud(tabuleiro.getNumeroColunas());
+
+		container.add(hud.getHud());
+		container.add(jogo);
+		
+		preencherTela();
+		
 		return container;
 	}
 	
@@ -81,20 +72,17 @@ public class TelaJogo implements SaidaJogo {
 	@Override
 	public void iniciarJogo() {
 		frame.setVisible(true);
-		//fabricaSom.comecarJogo();
 	}
 
 	@Override
 	public void alterarElemento(Posicao posicao, Elemento elemento) {
 		int indice = tabuleiro.getNumeroColunas() * posicao.getLinha()
 				+ posicao.getColuna();
-		//((JLabel) frame.getContentPane().getComponent(indice)).setIcon(fabricaIcones.obterIcone(elemento));
 		((JLabel) jogo.getComponent(indice)).setIcon(fabricaIcones.obterIcone(elemento));
 	}
 
 	@Override
 	public void passarDeFase() {
-		//fabricaSom.acabouFase();
 		JOptionPane.showMessageDialog(frame, "Ganhou!", "Ganhou!",
 				JOptionPane.INFORMATION_MESSAGE);
 		System.exit(0);
@@ -102,7 +90,6 @@ public class TelaJogo implements SaidaJogo {
 
 	@Override
 	public void perderJogo() {
-		//fabricaSom.perdeu();
 		JOptionPane.showMessageDialog(frame, "Perdeu!", "Perdeu!",
 				JOptionPane.ERROR_MESSAGE);
 		System.exit(0);
