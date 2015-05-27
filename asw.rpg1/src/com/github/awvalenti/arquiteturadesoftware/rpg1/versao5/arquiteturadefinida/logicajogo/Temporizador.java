@@ -19,6 +19,14 @@ public class Temporizador{
 		timer.scheduleAtFixedRate(new CountDown(), 0, 1000);
 	}
 	
+	public void pausarContador(long tempoEspera){
+		try {
+			timer.wait(tempoEspera);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void pararContador(){
 		timer.cancel();
 	}

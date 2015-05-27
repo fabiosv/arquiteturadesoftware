@@ -1,6 +1,7 @@
 package com.github.awvalenti.arquiteturadesoftware.rpg1.versao5.arquiteturadefinida.apresentacao;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -37,6 +38,7 @@ public class Hud {
 	private void criarRelogio() {
 		relogio = new JLabel();
 		relogio.setText("00:00");
+		relogio.setFont(new Font("Serif",0,24));
 		hud.add(relogio);
 	}
 
