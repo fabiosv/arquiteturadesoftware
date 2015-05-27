@@ -20,17 +20,15 @@ public class TelaJogo implements SaidaJogo {
 
 	private Tabuleiro tabuleiro;
 	private FabricaIcones fabricaIcones;
-	private FabricaSom fabricaSom;
 	private JFrame frame;
 
 	private Hud hud;
 	private JPanel jogo;
 	private JPanel container;
 
-	public TelaJogo(Tabuleiro tabuleiro, FabricaIcones fabricaIcones, FabricaSom fabricaSom) {
+	public TelaJogo(Tabuleiro tabuleiro, FabricaIcones fabricaIcones) {
 		this.tabuleiro = tabuleiro;
 		this.fabricaIcones = fabricaIcones;
-		this.fabricaSom = fabricaSom;
 
 		frame = new JFrame();
 
@@ -79,15 +77,11 @@ public class TelaJogo implements SaidaJogo {
 			}
 		}
 	}
-	
-	public FabricaSom getFabricaSom() {
-		return fabricaSom;
-	}
 
 	@Override
 	public void iniciarJogo() {
 		frame.setVisible(true);
-		fabricaSom.comecarJogo();
+		//fabricaSom.comecarJogo();
 	}
 
 	@Override
@@ -100,7 +94,7 @@ public class TelaJogo implements SaidaJogo {
 
 	@Override
 	public void passarDeFase() {
-		fabricaSom.acabouFase();
+		//fabricaSom.acabouFase();
 		JOptionPane.showMessageDialog(frame, "Ganhou!", "Ganhou!",
 				JOptionPane.INFORMATION_MESSAGE);
 		System.exit(0);
@@ -108,7 +102,7 @@ public class TelaJogo implements SaidaJogo {
 
 	@Override
 	public void perderJogo() {
-		fabricaSom.perdeu();
+		//fabricaSom.perdeu();
 		JOptionPane.showMessageDialog(frame, "Perdeu!", "Perdeu!",
 				JOptionPane.ERROR_MESSAGE);
 		System.exit(0);

@@ -22,7 +22,7 @@ public class MainVersao5 {
 		};
 
 		Tabuleiro tabuleiro = new Tabuleiro(disposicaoInicial1, 15);
-		tabuleiro.setSaida(new TelaJogo(tabuleiro, new FabricaIcones(), new FabricaSom()));
+		tabuleiro.setSaida(new TelaJogo(tabuleiro, new FabricaIcones()));
 		tabuleiro.iniciarJogo();
 	}
 

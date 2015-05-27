@@ -14,16 +14,17 @@ public class Tabuleiro implements SaidaTemporizador{
 	public Tabuleiro(Elemento[][] matriz, int tempoFase) {
 		this.matriz = matriz;
 		this.temporizador = new Temporizador(this, tempoFase);
+		fabricaSom = new FabricaSom();
 	}
 
 	public void setSaida(SaidaJogo saida) {
 		this.saida = saida;
-		//this.fabricaSom;
 	}
 
 	public void iniciarJogo() {
 		ocultarPortal();
 		saida.iniciarJogo();
+		fabricaSom.comecarJogo();
 		temporizador.iniciarContador();
 	}
 
@@ -54,16 +55,18 @@ public class Tabuleiro implements SaidaTemporizador{
 		case AGUA:
 			temporizador.pararContador();
 			saida.perderJogo();
+			fabricaSom.perdeu();
 			break;
 
 		case MACA:
-			FabricaSom.pegouMaca();
+			fabricaSom.pegouMaca();
 			if (quantidadeMacasRestantes() == 0) reexibirPortal();
 			break;
 
 		case PORTAL:
 			temporizador.pararContador();
 			saida.passarDeFase();
+			fabricaSom.acabouFase();
 			break;
 
 		default:
@@ -121,7 +124,8 @@ public class Tabuleiro implements SaidaTemporizador{
 			saida.alterarRelogio(tempoRestante);
 		} else {
 			saida.alterarRelogio(tempoRestante);
-			saida.perderJogo();
+			fabricaSom.perdeu();
+			saida.perderJogo();	
 		}
 	}
 

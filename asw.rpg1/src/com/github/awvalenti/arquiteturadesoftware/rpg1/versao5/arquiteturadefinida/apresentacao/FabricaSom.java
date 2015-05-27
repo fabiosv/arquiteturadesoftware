@@ -11,7 +11,7 @@ public class FabricaSom {
 		ElementoSonoro.FUNDO.play();
 	}
 	
-	public static void pegouMaca(){
+	public void pegouMaca(){
 		ElementoSonoro.MACA.play();
 	}
 	
