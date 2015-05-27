@@ -1,22 +1,30 @@
 package com.github.awvalenti.arquiteturadesoftware.rpg1.versao5.arquiteturadefinida.logicajogo;
 
-public class Tabuleiro {
+import com.github.awvalenti.arquiteturadesoftware.rpg1.versao5.arquiteturadefinida.apresentacao.FabricaSom;
+
+public class Tabuleiro implements SaidaTemporizador{
 
 	private Elemento[][] matriz;
 	private SaidaJogo saida;
 	private Posicao posicaoDoPortalOculto;
+	
+	private Temporizador temporizador;
+	private FabricaSom fabricaSom;
 
-	public Tabuleiro(Elemento[][] matriz) {
+	public Tabuleiro(Elemento[][] matriz, int tempoFase) {
 		this.matriz = matriz;
+		this.temporizador = new Temporizador(this, tempoFase);
 	}
 
 	public void setSaida(SaidaJogo saida) {
 		this.saida = saida;
+		//this.fabricaSom;
 	}
 
 	public void iniciarJogo() {
 		ocultarPortal();
 		saida.iniciarJogo();
+		temporizador.iniciarRegressao();
 	}
 
 	public int getNumeroLinhas() {
@@ -48,6 +56,7 @@ public class Tabuleiro {
 			break;
 
 		case MACA:
+			FabricaSom.pegouMaca();
 			if (quantidadeMacasRestantes() == 0) reexibirPortal();
 			break;
 
@@ -102,6 +111,16 @@ public class Tabuleiro {
 	private boolean posicaoEhInvalida(Posicao p) {
 		return p.getLinha() < 0 || p.getLinha() >= getNumeroLinhas()
 				|| p.getColuna() < 0 || p.getColuna() >= getNumeroColunas();
+	}
+
+	@Override
+	public void tique(int tempoRestante) {
+		if(tempoRestante>0){
+			saida.alterarRelogio(tempoRestante);
+		} else {
+			saida.alterarRelogio(tempoRestante);
+			saida.perderJogo();
+		}
 	}
 
 }

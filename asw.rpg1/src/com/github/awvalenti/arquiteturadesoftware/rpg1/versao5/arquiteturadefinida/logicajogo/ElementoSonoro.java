@@ -1,14 +1,17 @@
 package com.github.awvalenti.arquiteturadesoftware.rpg1.versao5.arquiteturadefinida.logicajogo;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
 import javax.sound.sampled.*;
 
 public enum ElementoSonoro {
 
 	FUNDO("/fundo.wav"), 
 	MORREU("/morreu.wav"), 
-	MACA("/moeda.wav");
+	MACA("/moeda.wav"), 
+	MUSICA("/Britney Spears-Piece of Me.wav");
 
 	private Clip clip;
 	private int position;
@@ -16,10 +19,12 @@ public enum ElementoSonoro {
 	ElementoSonoro(String caminhoSom) {
 		try {
 			// Use URL (instead of File) to read from disk and JAR.
-			URL url = this.getClass().getClassLoader().getResource(caminhoSom);
+			// URL url =
+			// this.getClass().getClassLoader().getResource(caminhoSom);
 			// Set up an audio input stream piped from the sound file.
 			AudioInputStream audioInputStream = AudioSystem
-					.getAudioInputStream(url);
+					.getAudioInputStream(getClass().getResourceAsStream(
+							caminhoSom));
 			// Get a clip resource.
 			clip = AudioSystem.getClip();
 			// Open audio clip and load samples from the audio input stream.
@@ -41,15 +46,24 @@ public enum ElementoSonoro {
 		clip.setFramePosition(0); // rewind to the beginning
 		clip.start(); // Start playing
 	}
-	
-	public void resume(){
+
+	public void resume() {
 		if (clip.isRunning()) {
 			this.position = clip.getFramePosition();
-			clip.stop(); 
+			clip.stop();
 		} else {
 			clip.setFramePosition(position);
 			clip.start();
 		}
+	}
+
+	public void reiniciarSom() {
+		if (clip.isRunning()) {
+			this.position = 0;
+			clip.stop();
+		}
+		clip.setFramePosition(position-position);
+		clip.start();
 	}
 
 	// Optional static method to pre-load all the sound files.
