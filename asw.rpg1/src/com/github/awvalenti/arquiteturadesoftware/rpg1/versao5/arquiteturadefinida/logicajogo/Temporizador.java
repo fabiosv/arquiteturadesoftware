@@ -15,8 +15,12 @@ public class Temporizador{
 		this.tempoInicial = tempoInicial;
 	}
 	
-	public void iniciarRegressao(){
+	public void iniciarContador(){
 		timer.scheduleAtFixedRate(new CountDown(), 0, 1000);
+	}
+	
+	public void pararContador(){
+		timer.cancel();
 	}
 
 	private class CountDown extends TimerTask{

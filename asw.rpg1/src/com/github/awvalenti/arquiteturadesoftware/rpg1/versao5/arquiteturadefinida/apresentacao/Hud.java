@@ -22,7 +22,7 @@ public class Hud {
 	public Hud(int colunas) {
 		this.hud = new JPanel(new GridLayout());
 		hud.setSize(colunas, 0);
-		System.out.printf("altura:%d,largura:%d\n",hud.getSize().height,hud.getSize().width);
+		System.out.printf("altura:%d,largura:%d\n", hud.getSize().height, hud.getSize().width);
 		hud.setBackground(Color.WHITE);
 		this.colunas = colunas;
 		this.fabricaIcones = new FabricaIcones();
@@ -50,10 +50,15 @@ public class Hud {
 	public JPanel getHud() {
 		return hud;
 	}
-	
+
 	public void alterarRelogio(int tempo) {
-		String relogioTexto = String.format("%02d:%02d", tempo/60,tempo%60);
+		if (tempo <= 10) {
+			relogio.setForeground(Color.RED);
+		} else {
+			relogio.setForeground(Color.black);
+		}
+		String relogioTexto = String.format("%02d:%02d", tempo / 60, tempo % 60);
 		relogio.setText(relogioTexto);
-		//System.out.println(relogioTexto);
+		// System.out.println(relogioTexto);
 	}
 }

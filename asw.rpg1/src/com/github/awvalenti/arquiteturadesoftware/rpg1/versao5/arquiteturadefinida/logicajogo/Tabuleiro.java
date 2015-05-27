@@ -9,7 +9,7 @@ public class Tabuleiro implements SaidaTemporizador{
 	private Posicao posicaoDoPortalOculto;
 	
 	private Temporizador temporizador;
-	private FabricaSom fabricaSom;
+	//private FabricaSom fabricaSom;
 
 	public Tabuleiro(Elemento[][] matriz, int tempoFase) {
 		this.matriz = matriz;
@@ -24,7 +24,7 @@ public class Tabuleiro implements SaidaTemporizador{
 	public void iniciarJogo() {
 		ocultarPortal();
 		saida.iniciarJogo();
-		temporizador.iniciarRegressao();
+		temporizador.iniciarContador();
 	}
 
 	public int getNumeroLinhas() {
@@ -52,6 +52,7 @@ public class Tabuleiro implements SaidaTemporizador{
 
 		switch (elementoAlcancado) {
 		case AGUA:
+			temporizador.pararContador();
 			saida.perderJogo();
 			break;
 
