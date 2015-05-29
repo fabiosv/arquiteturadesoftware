@@ -2,9 +2,9 @@ package com.github.awvalenti.arquiteturadesoftware.rpg1.versao5.arquiteturadefin
 
 import com.github.awvalenti.arquiteturadesoftware.rpg1.versao5.arquiteturadefinida.logicajogo.ElementoSonoro;
 
-public class FabricaSom {
+public class EfeitoSonoro {
 	
-	public FabricaSom() {
+	public EfeitoSonoro() {
 	}
 	
 	public void comecarJogo(){

@@ -7,7 +7,6 @@ public enum Elemento {
 	PERSONAGEM("/personagem.png"),
 	GRAMA("/grama.png"),
 	PORTAL("/passagem.png"),
-	NADA("/nada.png")
 	;
 
 	private final String caminhoImagem;

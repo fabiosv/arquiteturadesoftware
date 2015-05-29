@@ -12,13 +12,10 @@ import com.github.awvalenti.arquiteturadesoftware.rpg1.versao5.arquiteturadefini
 public class Hud {
 
 	private JPanel hud;
-	private FabricaIcones fabricaIcones;
 
 	private int colunas;
 
 	private JLabel relogio;
-
-	private int quantidadeDeVidaInicial = 5;
 
 	public Hud(int colunas) {
 		this.hud = new JPanel(new GridLayout());
@@ -26,13 +23,11 @@ public class Hud {
 		System.out.printf("altura:%d,largura:%d\n", hud.getSize().height, hud.getSize().width);
 		hud.setBackground(Color.WHITE);
 		this.colunas = colunas;
-		this.fabricaIcones = new FabricaIcones();
 		gerarHud();
 	}
 
 	private void gerarHud() {
 		criarRelogio();
-		preencherEspacosVazios();
 	}
 
 	private void criarRelogio() {
@@ -40,13 +35,6 @@ public class Hud {
 		relogio.setText("00:00");
 		relogio.setFont(new Font("Serif",0,24));
 		hud.add(relogio);
-	}
-
-	private void preencherEspacosVazios() {
-		int total = quantidadeDeVidaInicial + 4;
-		for (; total < colunas; ++total) {
-			hud.add(new JLabel(fabricaIcones.obterIcone(Elemento.NADA)));
-		}
 	}
 
 	public JPanel getHud() {

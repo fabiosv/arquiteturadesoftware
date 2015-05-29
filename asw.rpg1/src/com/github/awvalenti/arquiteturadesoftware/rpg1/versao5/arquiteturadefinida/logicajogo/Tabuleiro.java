@@ -1,6 +1,6 @@
 package com.github.awvalenti.arquiteturadesoftware.rpg1.versao5.arquiteturadefinida.logicajogo;
 
-import com.github.awvalenti.arquiteturadesoftware.rpg1.versao5.arquiteturadefinida.apresentacao.FabricaSom;
+import com.github.awvalenti.arquiteturadesoftware.rpg1.versao5.arquiteturadefinida.apresentacao.EfeitoSonoro;
 
 public class Tabuleiro implements SaidaTemporizador{
 
@@ -9,12 +9,12 @@ public class Tabuleiro implements SaidaTemporizador{
 	private Posicao posicaoDoPortalOculto;
 	
 	private Temporizador temporizador;
-	private FabricaSom fabricaSom;
+	private EfeitoSonoro fabricaSom;
 
 	public Tabuleiro(Elemento[][] matriz, int tempoFase) {
 		this.matriz = matriz;
 		this.temporizador = new Temporizador(this, tempoFase);
-		fabricaSom = new FabricaSom();
+		fabricaSom = new EfeitoSonoro();
 	}
 
 	public void setSaida(SaidaJogo saida) {
