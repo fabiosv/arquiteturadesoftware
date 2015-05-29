@@ -16,12 +16,12 @@ public class EfeitoSonoro {
 	}
 	
 	public void perdeu(){
-		ElementoSonoro.FUNDO.resume();
+		ElementoSonoro.FUNDO.pauseAndResume();
 		ElementoSonoro.MORREU.play();
 	}
 	
 	public void acabouFase(){
-		ElementoSonoro.FUNDO.resume();
+		ElementoSonoro.FUNDO.pauseAndResume();
 		ElementoSonoro.GANHOU.play();
 	}
 }

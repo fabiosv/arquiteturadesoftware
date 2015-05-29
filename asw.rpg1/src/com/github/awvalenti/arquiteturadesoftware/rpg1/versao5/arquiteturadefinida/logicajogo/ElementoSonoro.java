@@ -10,7 +10,7 @@ public enum ElementoSonoro {
 	MORREU("/morreu.wav"), 
 	MACA("/moeda.wav"), 
 	GANHOU("/ganhou.wav"),
-	MUSICA("/Britney Spears-Piece of Me.wav");
+	;
 
 	private Clip clip;
 	private int position;
@@ -46,7 +46,7 @@ public enum ElementoSonoro {
 		clip.start(); // Start playing
 	}
 
-	public void resume() {
+	public void pauseAndResume() {
 		if (clip.isRunning()) {
 			this.position = clip.getFramePosition();
 			clip.stop();
@@ -55,14 +55,11 @@ public enum ElementoSonoro {
 			clip.start();
 		}
 	}
-
-	public void reiniciarSom() {
+	
+	public void stop(){
 		if (clip.isRunning()) {
-			this.position = 0;
+			this.position = clip.getFramePosition();
 			clip.stop();
 		}
-		clip.setFramePosition(position-position);
-		clip.start();
 	}
-
 }

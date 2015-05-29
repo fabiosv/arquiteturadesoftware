@@ -7,13 +7,9 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.github.awvalenti.arquiteturadesoftware.rpg1.versao5.arquiteturadefinida.logicajogo.*;
-
 public class Hud {
 
 	private JPanel hud;
-
-	private int colunas;
 
 	private JLabel relogio;
 
@@ -22,7 +18,6 @@ public class Hud {
 		hud.setSize(colunas, 0);
 		System.out.printf("altura:%d,largura:%d\n", hud.getSize().height, hud.getSize().width);
 		hud.setBackground(Color.WHITE);
-		this.colunas = colunas;
 		gerarHud();
 	}
 
@@ -42,11 +37,12 @@ public class Hud {
 	}
 
 	public void alterarRelogio(int tempo) {
-		if (tempo <= 10) {
-			relogio.setForeground(Color.RED);
-		} else {
-			relogio.setForeground(Color.black);
+		relogio.setForeground(tempo <= 10 ? Color.RED : Color.BLACK);
+		
+		if(tempo <= 10){
+			relogio.setFont(tempo%2 == 0 ? new Font("Serif",0,24) : new Font("Serif",1,24));
 		}
+
 		String relogioTexto = String.format("%02d:%02d", tempo / 60, tempo % 60);
 		relogio.setText(relogioTexto);
 		// System.out.println(relogioTexto);
