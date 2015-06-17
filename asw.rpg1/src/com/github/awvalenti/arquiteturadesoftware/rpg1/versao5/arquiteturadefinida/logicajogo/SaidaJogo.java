@@ -11,5 +11,7 @@ public interface SaidaJogo {
 	void perderJogo();
 	
 	void alterarRelogio(int tempo);
+	
+	void pegouMaca();
 
 }

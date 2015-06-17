@@ -7,17 +7,21 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Hud {
+public class Hud extends JPanel{
 
-	private JPanel hud;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private final Font fonteNormal  = new Font("Serif",0,24);
+	private final Font fonteNegrito = new Font("Serif",1,24);
 
 	private JLabel relogio;
 
 	public Hud(int colunas) {
-		this.hud = new JPanel(new GridLayout());
-		hud.setSize(colunas, 0);
-		System.out.printf("altura:%d,largura:%d\n", hud.getSize().height, hud.getSize().width);
-		hud.setBackground(Color.WHITE);
+		this.setLayout(new GridLayout());
+		this.setBackground(Color.WHITE);
 		gerarHud();
 	}
 
@@ -28,19 +32,15 @@ public class Hud {
 	private void criarRelogio() {
 		relogio = new JLabel();
 		relogio.setText("00:00");
-		relogio.setFont(new Font("Serif",0,24));
-		hud.add(relogio);
-	}
-
-	public JPanel getHud() {
-		return hud;
+		relogio.setFont(fonteNormal);
+		this.add(relogio);
 	}
 
 	public void alterarRelogio(int tempo) {
 		relogio.setForeground(tempo <= 10 ? Color.RED : Color.BLACK);
 		
 		if(tempo <= 10){
-			relogio.setFont(tempo%2 == 0 ? new Font("Serif",0,24) : new Font("Serif",1,24));
+			relogio.setFont(tempo%2 == 0 ? fonteNormal : fonteNegrito);
 		}
 
 		String relogioTexto = String.format("%02d:%02d", tempo / 60, tempo % 60);

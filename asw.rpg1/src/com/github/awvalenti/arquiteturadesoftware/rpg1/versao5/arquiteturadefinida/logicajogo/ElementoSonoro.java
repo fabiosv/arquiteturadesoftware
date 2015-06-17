@@ -10,6 +10,7 @@ public enum ElementoSonoro {
 	MORREU("/morreu.wav"), 
 	MACA("/moeda.wav"), 
 	GANHOU("/ganhou.wav"),
+	RELOGIO("/relogio.wav"),
 	;
 
 	private Clip clip;
@@ -17,16 +18,10 @@ public enum ElementoSonoro {
 
 	ElementoSonoro(String caminhoSom) {
 		try {
-			// Use URL (instead of File) to read from disk and JAR.
-			// URL url =
-			// this.getClass().getClassLoader().getResource(caminhoSom);
-			// Set up an audio input stream piped from the sound file.
 			AudioInputStream audioInputStream = AudioSystem
 					.getAudioInputStream(getClass().getResourceAsStream(
 							caminhoSom));
-			// Get a clip resource.
 			clip = AudioSystem.getClip();
-			// Open audio clip and load samples from the audio input stream.
 			clip.open(audioInputStream);
 		} catch (UnsupportedAudioFileException e) {
 			e.printStackTrace();
@@ -37,23 +32,26 @@ public enum ElementoSonoro {
 		}
 	}
 
-	// Play or Re-play the sound effect from the beginning, by rewinding.
 	public void play() {
 		if (clip.isRunning()) {
-			clip.stop(); // Stop the player if it is still running
+			clip.stop();
 		}
-		clip.setFramePosition(0); // rewind to the beginning
-		clip.start(); // Start playing
+		clip.setFramePosition(0);
+		clip.start();
 	}
 
-	public void pauseAndResume() {
+	public void pause(){
 		if (clip.isRunning()) {
 			this.position = clip.getFramePosition();
 			clip.stop();
-		} else {
+		}
+	}
+	
+	public void resume() {
+		if(!clip.isRunning()){
 			clip.setFramePosition(position);
 			clip.start();
-		}
+		}		
 	}
 	
 	public void stop(){

@@ -31,6 +31,11 @@ public class TelaJogo implements SaidaJogo {
 
 		frame = new JFrame();
 		frame.addKeyListener(new TecladoListener());
+		
+		jogo = new JPanel();
+		jogo.setLayout(new GridLayout(tabuleiro.getNumeroLinhas(), tabuleiro.getNumeroColunas()));
+		
+		hud = new Hud(tabuleiro.getNumeroColunas());
 
 		frame.add(gerarTelaJogoComHUD());
 
@@ -42,13 +47,8 @@ public class TelaJogo implements SaidaJogo {
 	private JPanel gerarTelaJogoComHUD() {
 		JPanel container = new JPanel();
 		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-		
-		jogo = new JPanel();
-		jogo.setLayout(new GridLayout(tabuleiro.getNumeroLinhas(), tabuleiro.getNumeroColunas()));
-		
-		hud = new Hud(tabuleiro.getNumeroColunas());
 
-		container.add(hud.getHud());
+		container.add(hud);
 		container.add(jogo);
 		
 		preencherTela();
@@ -114,6 +114,8 @@ public class TelaJogo implements SaidaJogo {
 
 	}
 
+	@Override
+	public void pegouMaca() {
 
-
+	}
 }

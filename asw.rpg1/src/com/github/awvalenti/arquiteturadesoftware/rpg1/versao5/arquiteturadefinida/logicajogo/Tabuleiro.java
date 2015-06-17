@@ -1,30 +1,25 @@
 package com.github.awvalenti.arquiteturadesoftware.rpg1.versao5.arquiteturadefinida.logicajogo;
 
-import com.github.awvalenti.arquiteturadesoftware.rpg1.versao5.arquiteturadefinida.apresentacao.EfeitoSonoro;
-
-public class Tabuleiro implements SaidaTemporizador{
+public class Tabuleiro implements SaidaTemporizador {
 
 	private Elemento[][] matriz;
-	private SaidaJogo saida;
+	private SaidaComposta saidas;
 	private Posicao posicaoDoPortalOculto;
-	
+
 	private Temporizador temporizador;
-	private EfeitoSonoro fabricaSom;
 
 	public Tabuleiro(Elemento[][] matriz, int tempoFase) {
 		this.matriz = matriz;
 		this.temporizador = new Temporizador(this, tempoFase);
-		fabricaSom = new EfeitoSonoro();
 	}
 
-	public void setSaida(SaidaJogo saida) {
-		this.saida = saida;
+	public void setSaidas(SaidaJogo... saida) {
+		saidas = new SaidaComposta(saida);
 	}
 
 	public void iniciarJogo() {
 		ocultarPortal();
-		saida.iniciarJogo();
-		fabricaSom.comecarJogo();
+		saidas.iniciarJogo();
 		temporizador.iniciarContador();
 	}
 
@@ -44,7 +39,8 @@ public class Tabuleiro implements SaidaTemporizador{
 		Posicao posicaoAntiga = acharPosicaoDe(Elemento.PERSONAGEM);
 		Posicao posicaoNova = posicaoAntiga.somar(d);
 
-		if (posicaoEhInvalida(posicaoNova)) return;
+		if (posicaoEhInvalida(posicaoNova))
+			return;
 
 		Elemento elementoAlcancado = elementoEm(posicaoNova);
 
@@ -54,19 +50,20 @@ public class Tabuleiro implements SaidaTemporizador{
 		switch (elementoAlcancado) {
 		case AGUA:
 			temporizador.pararContador();
-			fabricaSom.perdeu();
-			saida.perderJogo();
+
+			saidas.perderJogo();
 			break;
 
 		case MACA:
-			fabricaSom.pegouMaca();
-			if (quantidadeMacasRestantes() == 0) reexibirPortal();
+			saidas.pegouMaca();
+			if (quantidadeMacasRestantes() == 0)
+				reexibirPortal();
 			break;
 
 		case PORTAL:
 			temporizador.pararContador();
-			fabricaSom.acabouFase();
-			saida.passarDeFase();	
+			saidas.passarDeFase();
+
 			break;
 
 		default:
@@ -86,7 +83,8 @@ public class Tabuleiro implements SaidaTemporizador{
 
 	private void alterarElemento(Posicao posicao, Elemento e) {
 		matriz[posicao.getLinha()][posicao.getColuna()] = e;
-		saida.alterarElemento(posicao, e);
+
+		saidas.alterarElemento(posicao, e);
 	}
 
 	private int quantidadeMacasRestantes() {
@@ -94,7 +92,8 @@ public class Tabuleiro implements SaidaTemporizador{
 
 		for (int i = 0; i < matriz.length; i++) {
 			for (int j = 0; j < matriz[i].length; j++) {
-				if (matriz[i][j] == Elemento.MACA) ++ret;
+				if (matriz[i][j] == Elemento.MACA)
+					++ret;
 			}
 		}
 
@@ -120,12 +119,9 @@ public class Tabuleiro implements SaidaTemporizador{
 
 	@Override
 	public void tique(int tempoRestante) {
-		if(tempoRestante>0){
-			saida.alterarRelogio(tempoRestante);
-		} else {
-			saida.alterarRelogio(tempoRestante);
-			fabricaSom.perdeu();
-			saida.perderJogo();	
+		saidas.alterarRelogio(tempoRestante);
+		if (tempoRestante <= 0) {
+			saidas.perderJogo();
 		}
 	}
 
